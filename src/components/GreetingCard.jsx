@@ -1,29 +1,29 @@
 
-import React,{useState,useEffect} from 'react';
-export default function GreetingCard()
-{
-    const [greeting,setGreeting]=useState('');
-    useEffect(()=>
-    {
-        const hour=newDate().getHours();
-        if(hour>=5 && hour<12)
-        {setGreeting('GoodMorning☀️');}
-        else if (hour>=12 && hour<17){
-        setGreeting('GoodAfternoon 🌤️');}
-    else if (hour>=17 && hour<21){
-        setGreeting('GoodEveninhg');}
-        else{
-            setGreeting('GoodNight🌙');}
+import React, { useState, useEffect } from 'react';
+export default function GreetingCard() {
+    const [greeting, setGreeting] = useState('');
+    useEffect(() => {
+        const hour = new Date().getHours();
+        if (hour >= 5 && hour < 12) { setGreeting('GoodMorning☀️'); }
+        else if (hour >= 12 && hour < 17) {
+            setGreeting('GoodAfternoon 🌤️');
+        }
+        else if (hour >= 17 && hour < 21) {
+            setGreeting('GoodEveninhg');
+        }
+        else {
+            setGreeting('GoodNight🌙');
+        }
 
-        },[]);
+    }, []);
 
-return (
-    <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-sm text-center">
-        <h2 className="text-xl font-semibold text-purple-700 mb-2">👋Welcome to Snippverse</h2>
-        <p className="text-2xl font-bold text-gray-800">{greeting}</p>
-    </div>
+    return (
+        <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-sm text-center">
+            <h2 className="text-xl font-semibold text-purple-700 mb-2">👋Welcome to Snippverse</h2>
+            <p className="text-2xl font-bold text-gray-800">{greeting}</p>
+        </div>
 
-);
+    );
 }
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code, Database,
-  Terminal, Users, Star, Brain, Sparkles, Image, Box, FileText, PenTool,
+  Terminal, Users, Star, Brain, Sparkles, Image, Box, FileText, Gamepad2,
   Stethoscope, Globe, Cpu
 } from 'lucide-react';
 
@@ -81,14 +81,14 @@ const Portfolio = () => {
       year: '2025'
     },
     {
-      title: 'Web Whiteboard',
-      description: 'Real-time collaborative canvas with WebSocket stroke sync, persistent state, undo/redo, and conflict-free delta broadcasting.',
-      tech: ['React', 'Node.js', 'WebSockets', 'Canvas'],
-      github: 'WhiteBoard',
-      live: 'https://website-whiteboard.netlify.app',
-      icon: <PenTool className="w-6 h-6" />,
+      title: 'AI Chess Arena',
+      description: 'Next.js chess platform with AI coach, engine-backed moves, real-time multiplayer rooms, board themes, and plain-language move feedback.',
+      tech: ['Next.js', 'Socket.io', 'MongoDB', 'LLM'],
+      github: 'AI_CHESS_ARENA',
+      live: 'https://ai-chess-arena-xi.vercel.app',
+      icon: <Gamepad2 className="w-6 h-6" />,
       color: 'from-orange-500 to-amber-600',
-      year: '2024'
+      year: '2025'
     }
   ];
 
@@ -283,8 +283,8 @@ const Portfolio = () => {
             from research to production with PyTorch, computer vision, and LLM fine-tuning.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <a href="mailto:f223441@cfd.nu.edu.pk" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
-              <Mail className="w-4 h-4" /> f223441@cfd.nu.edu.pk
+            <a href="mailto:wareeshaashraf09@gmail.com" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
+              <Mail className="w-4 h-4" /> wareeshaashraf09@gmail.com
             </a>
             <a href="tel:+923117714594" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
               <Phone className="w-4 h-4" /> +92 311 7714594
@@ -489,19 +489,11 @@ const Portfolio = () => {
                   <p className="text-sm text-gray-400">wareeshayyyyy</p>
                 </a>
                 <a
-                  href="mailto:f223441@cfd.nu.edu.pk"
-                  className="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-all duration-300 transform hover:scale-105"
-                >
-                  <Mail className="w-10 h-10 text-gray-400 group-hover:text-white mx-auto mb-3 transition-colors" />
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-sm text-gray-400">f223441@cfd.nu.edu.pk</p>
-                </a>
-                <a
                   href="mailto:wareeshaashraf09@gmail.com"
                   className="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-all duration-300 transform hover:scale-105"
                 >
                   <Mail className="w-10 h-10 text-gray-400 group-hover:text-white mx-auto mb-3 transition-colors" />
-                  <h3 className="font-semibold mb-1">Gmail</h3>
+                  <h3 className="font-semibold mb-1">Email</h3>
                   <p className="text-sm text-gray-400">wareeshaashraf09@gmail.com</p>
                 </a>
                 <a

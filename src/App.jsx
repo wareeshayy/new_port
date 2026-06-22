@@ -65,7 +65,7 @@ const Portfolio = () => {
       description: 'Text-to-3D platform with PyTorch generative pipeline, Three.js real-time browser preview, and Dockerized FastAPI deployment.',
       tech: ['React', 'Three.js', 'PyTorch', 'FastAPI'],
       github: '3D_Craft_AI',
-      live: 'https://3-d-craft-ai.vercel.app',
+      live: 'https://aquamarine-3dcradtai.netlify.app',
       icon: <Box className="w-6 h-6" />,
       color: 'from-violet-500 to-indigo-600',
       year: '2025'

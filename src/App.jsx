@@ -292,7 +292,7 @@ const Portfolio = () => {
             <a href="https://github.com/wareeshayy" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
               <Github className="w-4 h-4" /> github.com/wareeshayy
             </a>
-            <a href="https://www.linkedin.com/in/wareeshayyyyy" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
+            <a href="https://www.linkedin.com/in/wareesha-ashraf-17a99827b/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
               <Linkedin className="w-4 h-4" /> LinkedIn
             </a>
           </div>
@@ -479,14 +479,14 @@ const Portfolio = () => {
                   <p className="text-sm text-gray-400">wareeshayy</p>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/wareeshayyyyy"
+                  href="https://www.linkedin.com/in/wareesha-ashraf-17a99827b/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-all duration-300 transform hover:scale-105"
                 >
                   <Linkedin className="w-10 h-10 text-gray-400 group-hover:text-white mx-auto mb-3 transition-colors" />
                   <h3 className="font-semibold mb-1">LinkedIn</h3>
-                  <p className="text-sm text-gray-400">wareeshayyyyy</p>
+                  <p className="text-sm text-gray-400">wareesha-ashraf</p>
                 </a>
                 <a
                   href="mailto:wareeshaashraf09@gmail.com"

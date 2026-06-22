@@ -19,4 +19,4 @@ Personal developer portfolio built with **React.js** and **Tailwind CSS**.
 - Email: wareeshaashraf09@gmail.com
 - Phone: +92 311 7714594
 - [GitHub](https://github.com/wareeshayy)
-- [LinkedIn](https://www.linkedin.com/in/wareeshayyyyy)
+- [LinkedIn](https://www.linkedin.com/in/wareesha-ashraf-17a99827b/)

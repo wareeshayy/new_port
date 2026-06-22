@@ -35,7 +35,7 @@ const Portfolio = () => {
       description: 'AI-powered USMLE prep platform with SSR, adaptive question banks, real-time dashboards, and LLM fine-tuning for study plans and feedback.',
       tech: ['Next.js', 'Node.js', 'Supabase', 'LLM'],
       github: 'FYP-MediQuest',
-      live: 'https://fyp-medi-quest-r7lc.vercel.app',
+      live: 'https://fyp-medi-quest.vercel.app',
       icon: <Stethoscope className="w-6 h-6" />,
       color: 'from-emerald-500 to-teal-600',
       year: '2025'

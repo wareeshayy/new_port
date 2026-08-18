@@ -35,16 +35,19 @@ export default function App(){
     const updateStack=()=>{
       const scrollMax=document.documentElement.scrollHeight-window.innerHeight;
       document.documentElement.style.setProperty('--scroll-progress',String(scrollMax>0?window.scrollY/scrollMax:0));
-      if(window.innerWidth<=900){cards.forEach(card=>{card.style.removeProperty('--stack-scale');card.style.removeProperty('--stack-dim')});return}
+      if(window.innerWidth<=900){cards.forEach(card=>{card.style.removeProperty('--stack-scale');card.style.removeProperty('--stack-dim');card.style.removeProperty('--exit-x');card.style.removeProperty('--exit-rotate')});return}
       cards.forEach((card,index)=>{
         const next=cards[index+1];
         if(!next)return;
         const nextTop=next.getBoundingClientRect().top;
-        const start=window.innerHeight*.82;
-        const end=110+(index+1)*13;
+        const start=window.innerHeight*.88;
+        const end=155+(index+1)*10;
         const progress=Math.max(0,Math.min(1,(start-nextTop)/(start-end)));
-        card.style.setProperty('--stack-scale',String(1-progress*.045));
-        card.style.setProperty('--stack-dim',String(1-progress*.34));
+        const direction=index%2===0?-1:1;
+        card.style.setProperty('--stack-scale',String(1-progress*.035));
+        card.style.setProperty('--stack-dim',String(1-progress*.12));
+        card.style.setProperty('--exit-x',`${direction*progress*112}vw`);
+        card.style.setProperty('--exit-rotate',`${direction*progress*5}deg`);
       });
     };
     const onScroll=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(updateStack)};
@@ -89,7 +92,7 @@ export default function App(){
 
     <section className="work section" id="work"><div className="wrap">
       <Label>02 / FEATURED WORK</Label><div className="section-heading reveal"><h2><span>SELECTED WORKS.</span><strong>ENGINEERED VALUE.</strong></h2><p>Scroll through six deployed products, each designed around a real problem and a focused technical system.</p></div>
-      <div className="project-stack">{projects.map((p,i)=><article className="project-card" key={p.title} style={{top:`${96+i*13}px`,zIndex:i+1}}>
+      <div className="project-stack">{projects.map((p,i)=><article className="project-card" key={p.title} style={{top:`${96+i*10}px`,zIndex:projects.length-i}}>
         <div className="corner tl"/><div className="corner tr"/><div className="corner bl"/><div className="corner br"/><span className="watermark-number">{p.number}</span>
         <div className="project-main"><div className="project-tag"><b>{p.number} //</b> {p.category}</div><h3>{p.title}</h3><p>{p.description}</p><div className="tech">{p.tech.map(t=><span key={t}>{t}</span>)}</div></div>
         <div className="project-side"><small>// SYSTEM METRICS</small>{p.metrics.map(([a,b])=><div className="metric" key={a}><span>{a}</span><b>{b}</b></div>)}<a href={p.url} target="_blank" rel="noreferrer">Launch project <ArrowUpRight/></a></div>

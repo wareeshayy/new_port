@@ -1,88 +1,84 @@
 import { useEffect, useState } from 'react';
-import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 
 const projects = [
-  { name: 'MediQuest', type: 'AI / Healthtech', year: '2026', url: 'https://fyp-medi-quest.vercel.app/', code: 'MQ', className: 'medi', description: 'An AI-powered medical learning platform built for focused, adaptive study.' },
-  { name: 'IJAIKE', type: 'AI / Research', year: '2026', url: 'https://ijaike-chatbot.vercel.app/', code: 'AI', className: 'ijaike', description: 'A research chatbot that turns complex questions into grounded, useful answers.' },
-  { name: 'AI Chess Arena', type: 'AI / Multiplayer', year: '2026', url: 'https://ai-chess-arena-xi.vercel.app/', code: '♞', className: 'chess', description: 'A polished multiplayer chess experience with an intelligent AI opponent.' },
-  { name: 'PixelCraft', type: 'Creative tools', year: '2025', url: 'https://pixel-craft-v1.vercel.app/', code: 'PX', className: 'pixel', description: 'Fast, friendly image and PDF processing tools in one creative workspace.' },
-  { name: 'Connecto', type: 'Social / Full-stack', year: '2025', url: 'https://connecto-web-app.vercel.app/', code: 'CO', className: 'connecto', description: 'A full-stack social platform designed around people, posts, and conversation.' },
-  { name: 'Wronyx', type: 'Web experience', year: '2025', url: 'https://wronyx.netlify.app/', code: 'WX', className: 'wronyx', description: 'A distinctive digital experience with a crisp, modern visual language.' },
+  { number:'01', title:'MediQuest', category:'AI / Medical Learning', url:'https://fyp-medi-quest.vercel.app/', description:'An AI-powered medical learning platform designed to make complex clinical concepts easier to understand, practise, and retain.', tech:['Next.js','AI / LLM','Supabase','Tailwind'], metrics:[['FOCUS','Medical Education'],['SYSTEM','Adaptive Learning'],['STATUS','Live']] },
+  { number:'02', title:'IJAIKE', category:'AI / Research Assistant', url:'https://ijaike-chatbot.vercel.app/', description:'A research-focused conversational assistant that turns complex questions into clear, contextual, and useful responses.', tech:['React','NLP','LLM','Vercel'], metrics:[['MODE','Research Chat'],['ENGINE','Generative AI'],['STATUS','Live']] },
+  { number:'03', title:'AI Chess Arena', category:'AI / Multiplayer Platform', url:'https://ai-chess-arena-xi.vercel.app/', description:'A refined online chess platform combining intelligent opponents, multiplayer competition, and an immersive board experience.', tech:['Next.js','Socket.io','AI Engine','MongoDB'], metrics:[['MODE','Multiplayer'],['INTELLIGENCE','AI Opponent'],['STATUS','Live']] },
+  { number:'04', title:'PixelCraft', category:'Creative / Processing Suite', url:'https://pixel-craft-v1.vercel.app/', description:'A unified image and PDF processing workspace built for fast, intuitive transformations without a complicated workflow.', tech:['React','Canvas','PDF Tools','FastAPI'], metrics:[['TOOLS','Image + PDF'],['WORKFLOW','Browser First'],['STATUS','Live']] },
+  { number:'05', title:'Connecto', category:'Social / Full-Stack Platform', url:'https://connecto-web-app.netlify.app/', description:'A full-stack social media product built around profiles, publishing, discovery, and meaningful real-time interaction.', tech:['React','Redux','Node.js','MongoDB'], metrics:[['TYPE','Social Network'],['STACK','MERN'],['STATUS','Live']] },
+  { number:'06', title:'Wronyx', category:'Web / Digital Experience', url:'https://wronyx.netlify.app/', description:'A contemporary web experience shaped through crisp interface design, deliberate motion, and responsive engineering.', tech:['React','JavaScript','Responsive UI','Netlify'], metrics:[['FOCUS','Web Experience'],['DESIGN','Responsive'],['STATUS','Live']] },
 ];
 
-const stack = ['React', 'Next.js', 'JavaScript', 'Python', 'PyTorch', 'Node.js', 'MongoDB', 'Supabase', 'Tailwind CSS', 'AI / ML'];
+const capabilities = [
+  { id:'SYS.01', title:'Full-Stack Engineering', text:'Scalable interfaces, robust APIs, secure authentication, databases, and deployment.', tools:['React','Next.js','Node.js','FastAPI','MongoDB','Supabase'] },
+  { id:'INT.02', title:'Applied Intelligence', text:'Practical AI products that connect models with useful, human-centered experiences.', tools:['PyTorch','Computer Vision','LLMs','NLP','Generative AI'] },
+  { id:'EXP.03', title:'Product Experience', text:'Responsive systems with purposeful hierarchy, accessible interactions, and visual precision.', tools:['Tailwind CSS','UI Architecture','Responsive Design','Git'] },
+];
 
-export default function App() {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const reveal = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('shown')), { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach((el) => reveal.observe(el));
-    return () => reveal.disconnect();
-  }, []);
+const journey = [
+  { year:'2022 — 2026', title:'BS Computer Science', org:'FAST NUCES', text:'Building a strong foundation across algorithms, software engineering, artificial intelligence, data science, and modern web systems.' },
+  { year:'2024 — Present', title:'Full-Stack Developer', org:'Independent Projects', text:'Designing and shipping production-ready web applications from interface architecture through backend integration and deployment.' },
+  { year:'2025 — Present', title:'AI / ML Engineer', org:'Applied Research & Products', text:'Transforming machine-learning research into accessible products across medical learning, vision, assistants, and intelligent tools.' },
+];
 
-  const go = (id) => { document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); };
+const Label = ({children}) => <div className="section-label"><span>{children}</span><i /></div>;
 
+export default function App(){
+  const [menuOpen,setMenuOpen]=useState(false);
+  const [form,setForm]=useState({name:'',email:'',message:''});
+  useEffect(()=>{const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('is-visible')),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));return()=>io.disconnect()},[]);
+  const submit=(e)=>{e.preventDefault();const subject=encodeURIComponent(`Portfolio inquiry from ${form.name}`);const body=encodeURIComponent(`${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`);window.location.href=`mailto:wareeshaashraf09@gmail.com?subject=${subject}&body=${body}`};
   return <main>
-    <nav>
-      <a className="brand" href="#top">WAREESHA<span>®</span></a>
-      <button className="menu" aria-label="Toggle menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
-      <div className={`navlinks ${open ? 'open' : ''}`}>
-        {['About', 'Projects', 'Skills', 'Contact'].map(item => <button key={item} onClick={() => go(`#${item.toLowerCase()}`)}>{item}</button>)}
+    <section className="hero" id="home">
+      <div className="hero-noise"/><div className="hero-aura"/><div className="hero-orbit orbit-a"/><div className="hero-orbit orbit-b"/>
+      <nav>
+        <a className="logo" href="#home">WAREESHA.</a>
+        <div className={`nav-links ${menuOpen?'active':''}`}>{['about','work','skills','journey','contact'].map(x=><a key={x} href={`#${x}`} onClick={()=>setMenuOpen(false)}>{x}</a>)}</div>
+        <a className="talk" href="#contact">Let's talk <ArrowUpRight/></a>
+        <button className="menu" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen?<X/>:<Menu/>}</button>
+      </nav>
+      <div className="hero-content">
+        <div className="hero-copy reveal">
+          <p className="kicker">Full-stack developer <b>•</b> AI/ML engineer</p>
+          <h1><span>I BUILD</span><span>DIGITAL</span><span>EXPERIENCES</span></h1>
+          <p className="intro">I turn ambitious ideas into intelligent digital products—where thoughtful interfaces meet powerful engineering.</p>
+          <div className="hero-actions"><a href="#work" className="button primary">Explore my work <ArrowUpRight/></a><a href="https://github.com/wareeshayy" target="_blank" rel="noreferrer" className="button">View GitHub <Github/></a></div>
+        </div>
+        <div className="hero-card reveal">
+          <div className="card-glint"/><small>ENGINEER / CREATOR</small><div className="monogram">WA</div><div className="signature">Wareesha</div><p>CODE IS MY CRAFT.<br/>IMPACT IS MY GOAL.</p><div className="card-coordinates">PK 31.72° N / 72.98° E</div>
+        </div>
       </div>
-    </nav>
-
-    <header id="top" className="hero">
-      <div className="eyebrow"><span /> Available for ambitious projects</div>
-      <h1>I BUILD<br/><em>DIGITAL</em><br/>EXPERIENCES.</h1>
-      <div className="hero-bottom">
-        <p>Full-stack developer and AI/ML engineer turning complex ideas into bold, useful products.</p>
-        <button className="circle-button" onClick={() => go('#projects')} aria-label="Explore my work"><ArrowDownRight /></button>
-      </div>
-      <div className="orb orb-one"/><div className="orb orb-two"/>
-    </header>
-
-    <section id="about" className="about reveal">
-      <div className="section-label">01 / About</div>
-      <div className="about-copy">
-        <h2>I DON'T JUST WRITE CODE.<br/><span>I BUILD WHAT'S NEXT.</span></h2>
-        <p>I'm Wareesha Ashraf, a full-stack developer and AI/ML engineer based in Pakistan. I build responsive web applications and intelligent systems that feel effortless to use—combining clean engineering with sharp visual thinking.</p>
-        <div className="facts"><div><strong>06+</strong><span>Featured projects</span></div><div><strong>10+</strong><span>Core technologies</span></div><div><strong>2026</strong><span>BS Computer Science</span></div></div>
-      </div>
+      <a href="#about" className="scroll-cue"><ArrowDown/><span>Scroll to explore</span></a>
     </section>
 
-    <section id="projects" className="projects">
-      <div className="section-head reveal"><div className="section-label">02 / Selected work</div><h2>PROJECTS THAT<br/><span>SPEAK FOR THEMSELVES.</span></h2></div>
-      <div className="project-grid">
-        {projects.map((project, index) => <a className="project-card reveal" href={project.url} target="_blank" rel="noreferrer" key={project.name}>
-          <div className={`project-visual ${project.className}`}>
-            <div className="browser-bar"><i/><i/><i/><span>{project.url.replace('https://','')}</span></div>
-            <div className="visual-code">{project.code}</div>
-            <div className="visual-index">0{index + 1}</div>
+    <section className="about section" id="about">
+      <div className="ambient ambient-left"/><div className="wrap">
+        <Label>01 / ABOUT ME</Label>
+        <div className="about-grid">
+          <div className="reveal"><h2><span>I DON'T JUST WRITE CODE.</span><strong>I BUILD WHAT'S NEXT.</strong></h2><p className="lead">I'm <em>Wareesha Ashraf</em>, a full-stack developer and AI/ML engineer focused on building scalable web applications, intelligent platforms, and refined digital experiences. I connect strong engineering with clear product thinking to turn complex requirements into useful outcomes.</p>
+            <div className="stats"><div><b>06+</b><span>Live platforms</span></div><div><b>10+</b><span>Technologies</span></div><div><b>2026</b><span>CS graduate</span></div></div>
           </div>
-          <div className="project-meta"><div><span>{project.type} · {project.year}</span><h3>{project.name}</h3><p>{project.description}</p></div><ArrowUpRight /></div>
-        </a>)}
+          <div className="identity-card reveal"><div className="id-top"><span>ENGINEERING IDENTITY</span><i>WA / 26</i></div><div className="id-portrait"><div className="profile-ring"><span>WA</span></div></div><div className="id-name"><small>FULL-STACK × AI</small><h3>WAREESHA<br/>ASHRAF</h3><p>Building at the intersection of software, intelligence, and experience.</p></div><div className="id-foot"><span>FAST NUCES</span><span>PAKISTAN</span></div></div>
+        </div>
       </div>
     </section>
 
-    <section id="skills" className="skills reveal">
-      <div className="section-label">03 / Capabilities</div>
-      <h2>IDEAS, ENGINEERED<br/><span>END TO END.</span></h2>
-      <div className="ticker">{stack.map((item, i) => <span key={item}>{item}<b>{i % 2 ? '✦' : '●'}</b></span>)}</div>
-      <div className="skill-columns">
-        <div><span>01</span><h3>Full-stack systems</h3><p>Responsive interfaces, robust APIs, authentication, databases, and thoughtful deployment.</p></div>
-        <div><span>02</span><h3>Applied intelligence</h3><p>AI-powered products, computer vision, LLM experiences, and machine-learning workflows.</p></div>
-        <div><span>03</span><h3>Product thinking</h3><p>Clear information architecture, purposeful motion, accessibility, and visual polish.</p></div>
-      </div>
-    </section>
+    <section className="work section" id="work"><div className="wrap">
+      <Label>02 / FEATURED WORK</Label><div className="section-heading reveal"><h2><span>SELECTED WORKS.</span><strong>ENGINEERED VALUE.</strong></h2><p>Scroll through six deployed products, each designed around a real problem and a focused technical system.</p></div>
+      <div className="project-stack">{projects.map((p,i)=><article className="project-card" key={p.title} style={{top:`${96+i*13}px`}}>
+        <div className="corner tl"/><div className="corner tr"/><div className="corner bl"/><div className="corner br"/><span className="watermark-number">{p.number}</span>
+        <div className="project-main"><div className="project-tag"><b>{p.number} //</b> {p.category}</div><h3>{p.title}</h3><p>{p.description}</p><div className="tech">{p.tech.map(t=><span key={t}>{t}</span>)}</div></div>
+        <div className="project-side"><small>// SYSTEM METRICS</small>{p.metrics.map(([a,b])=><div className="metric" key={a}><span>{a}</span><b>{b}</b></div>)}<a href={p.url} target="_blank" rel="noreferrer">Launch project <ArrowUpRight/></a></div>
+      </article>)}</div>
+    </div></section>
 
-    <footer id="contact" className="contact reveal">
-      <div className="section-label">04 / Let's work together</div>
-      <h2>HAVE AN IDEA?<br/><span>LET'S MAKE IT REAL.</span></h2>
-      <a className="email" href="mailto:wareeshaashraf09@gmail.com">wareeshaashraf09@gmail.com <ArrowUpRight /></a>
-      <div className="footer-row">
-        <p>© 2026 Wareesha Ashraf</p>
-        <div><a href="https://github.com/wareeshayy" target="_blank" rel="noreferrer"><Github/> GitHub</a><a href="https://www.linkedin.com/in/wareesha-ashraf-17a99827b/" target="_blank" rel="noreferrer"><Linkedin/> LinkedIn</a><a href="https://wareeshaportfolio.netlify.app/" target="_blank" rel="noreferrer"><ArrowUpRight/> Live portfolio</a></div>
-      </div>
-    </footer>
-  </main>;
+    <section className="skills section" id="skills"><div className="wrap"><Label>03 / CAPABILITIES</Label><div className="section-heading reveal"><h2><span>TECHNICAL ARSENAL.</span><strong>BUILT FOR IMPACT.</strong></h2></div><div className="cap-grid">{capabilities.map(c=><article className="cap-card reveal" key={c.id}><div className="cap-meta"><span>{c.id}</span><i>ONLINE</i></div><h3>{c.title}</h3><p>{c.text}</p><div className="tech">{c.tools.map(t=><span key={t}>{t}</span>)}</div></article>)}</div></div></section>
+
+    <section className="journey section" id="journey"><div className="wrap narrow"><Label>04 / EXPERIENCE</Label><div className="section-heading reveal"><h2><span>EXPERIENCE &</span><strong>MILESTONES.</strong></h2></div><div className="route">{journey.map((j,i)=><div className="route-stop reveal" key={j.title}><div className="year">{j.year}</div><i/><div><h3>{j.title}</h3><span>{j.org}</span><p>{j.text}</p></div><b>0{i+1}</b></div>)}</div></div></section>
+
+    <footer id="contact" className="contact section"><div className="wrap"><div className="contact-grid"><div className="reveal"><Label>05 / CONTACT</Label><h2><span>INITIALIZE</span><strong>TRANSMISSION.</strong></h2><p>Have an ambitious product, an engineering opportunity, or a collaborative idea? Send a direct dispatch.</p><div className="socials"><a href="https://github.com/wareeshayy" target="_blank" rel="noreferrer"><Github/> GitHub</a><a href="https://www.linkedin.com/in/wareesha-ashraf-17a99827b/" target="_blank" rel="noreferrer"><Linkedin/> LinkedIn</a><a href="mailto:wareeshaashraf09@gmail.com"><Mail/> Email</a></div></div>
+        <form className="terminal reveal" onSubmit={submit}><div className="terminal-head"><span>SECURE CHANNEL</span><i>● CONNECTED</i></div><div className="field-row"><label>// SENDER<input required value={form.name} onChange={e=>setForm({...form,name:e.target.value})} placeholder="Enter name"/></label><label>// CHANNEL<input required type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="Enter email"/></label></div><label>// PAYLOAD<textarea required rows="5" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} placeholder="Enter your message..."/></label><button>Execute dispatch <ArrowUpRight/></button></form>
+      </div><div className="footer-line"><span>PORTFOLIO // EDITION 2026</span><span>© 2026 WAREESHA ASHRAF</span></div></div></footer>
+  </main>
 }

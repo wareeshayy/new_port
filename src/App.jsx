@@ -27,7 +27,28 @@ const Label = ({children}) => <div className="section-label"><span>{children}</s
 export default function App(){
   const [menuOpen,setMenuOpen]=useState(false);
   const [form,setForm]=useState({name:'',email:'',message:''});
-  useEffect(()=>{const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('is-visible')),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));return()=>io.disconnect()},[]);
+  useEffect(()=>{
+    const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('is-visible')),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    const cards=[...document.querySelectorAll('.project-card')];
+    let frame;
+    const updateStack=()=>{
+      if(window.innerWidth<=900){cards.forEach(card=>{card.style.removeProperty('--stack-scale');card.style.removeProperty('--stack-dim')});return}
+      cards.forEach((card,index)=>{
+        const next=cards[index+1];
+        if(!next)return;
+        const nextTop=next.getBoundingClientRect().top;
+        const start=window.innerHeight*.82;
+        const end=110+(index+1)*13;
+        const progress=Math.max(0,Math.min(1,(start-nextTop)/(start-end)));
+        card.style.setProperty('--stack-scale',String(1-progress*.045));
+        card.style.setProperty('--stack-dim',String(1-progress*.34));
+      });
+    };
+    const onScroll=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(updateStack)};
+    updateStack();window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);
+    return()=>{io.disconnect();cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onScroll)}
+  },[]);
   const submit=(e)=>{e.preventDefault();const subject=encodeURIComponent(`Portfolio inquiry from ${form.name}`);const body=encodeURIComponent(`${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`);window.location.href=`mailto:wareeshaashraf09@gmail.com?subject=${subject}&body=${body}`};
   return <main>
     <section className="hero" id="home">
@@ -66,7 +87,7 @@ export default function App(){
 
     <section className="work section" id="work"><div className="wrap">
       <Label>02 / FEATURED WORK</Label><div className="section-heading reveal"><h2><span>SELECTED WORKS.</span><strong>ENGINEERED VALUE.</strong></h2><p>Scroll through six deployed products, each designed around a real problem and a focused technical system.</p></div>
-      <div className="project-stack">{projects.map((p,i)=><article className="project-card" key={p.title} style={{top:`${96+i*13}px`}}>
+      <div className="project-stack">{projects.map((p,i)=><article className="project-card" key={p.title} style={{top:`${96+i*13}px`,zIndex:i+1}}>
         <div className="corner tl"/><div className="corner tr"/><div className="corner bl"/><div className="corner br"/><span className="watermark-number">{p.number}</span>
         <div className="project-main"><div className="project-tag"><b>{p.number} //</b> {p.category}</div><h3>{p.title}</h3><p>{p.description}</p><div className="tech">{p.tech.map(t=><span key={t}>{t}</span>)}</div></div>
         <div className="project-side"><small>// SYSTEM METRICS</small>{p.metrics.map(([a,b])=><div className="metric" key={a}><span>{a}</span><b>{b}</b></div>)}<a href={p.url} target="_blank" rel="noreferrer">Launch project <ArrowUpRight/></a></div>

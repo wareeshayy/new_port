@@ -29,10 +29,12 @@ export default function App(){
   const [form,setForm]=useState({name:'',email:'',message:''});
   useEffect(()=>{
     const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('is-visible')),{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    document.querySelectorAll('.reveal').forEach((el,index)=>{el.style.setProperty('--delay',`${(index%3)*90}ms`);io.observe(el)});
     const cards=[...document.querySelectorAll('.project-card')];
     let frame;
     const updateStack=()=>{
+      const scrollMax=document.documentElement.scrollHeight-window.innerHeight;
+      document.documentElement.style.setProperty('--scroll-progress',String(scrollMax>0?window.scrollY/scrollMax:0));
       if(window.innerWidth<=900){cards.forEach(card=>{card.style.removeProperty('--stack-scale');card.style.removeProperty('--stack-dim')});return}
       cards.forEach((card,index)=>{
         const next=cards[index+1];
@@ -50,7 +52,7 @@ export default function App(){
     return()=>{io.disconnect();cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onScroll)}
   },[]);
   const submit=(e)=>{e.preventDefault();const subject=encodeURIComponent(`Portfolio inquiry from ${form.name}`);const body=encodeURIComponent(`${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`);window.location.href=`mailto:wareeshaashraf09@gmail.com?subject=${subject}&body=${body}`};
-  return <main>
+  return <main><div className="scroll-progress" aria-hidden="true" />
     <section className="hero" id="home">
       <div className="hero-noise"/><div className="hero-aura"/><div className="hero-orbit orbit-a"/><div className="hero-orbit orbit-b"/>
       <nav>
